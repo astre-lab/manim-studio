@@ -1,7 +1,14 @@
-import adapter from "@sveltejs/adapter-auto";
+import adapter_auto from "@sveltejs/adapter-auto";
+import adapter_cloudflare from "@sveltejs/adapter-cloudflare";
 import { sveltekit } from "@sveltejs/kit/vite";
 import { defineConfig } from "vite";
 import tailwindcss from "@tailwindcss/vite";
+
+// Choose adapter based on environment variable or flag
+const adapter = process.env.ADAPTER === 'cloudflare' 
+  ? adapter_cloudflare() 
+  : adapter_auto();
+
 
 export default defineConfig({
   plugins: [
@@ -13,10 +20,7 @@ export default defineConfig({
           filename.split(/[/\\]/).includes("node_modules") ? undefined : true,
       },
 
-      // adapter-auto only supports some environments, see https://svelte.dev/docs/kit/adapter-auto for a list.
-      // If your environment is not supported, or you settled on a specific environment, switch out the adapter.
-      // See https://svelte.dev/docs/kit/adapters for more information about adapters.
-      adapter: adapter(),
+      adapter: adapter,
     }),
   ],
 });

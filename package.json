@@ -6,11 +6,13 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
+    "build:cf": "ADAPTER=cloudflare vite build",
     "preview": "vite preview",
     "prepare": "svelte-kit sync || echo ''",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-    "new": "tsx scripts/new_animation.ts"
+    "new": "tsx scripts/new_animation.ts",
+    "sitemap": "deno run --allow-read=./src --allow-write=./static --allow-env=DENO_ENV,BASE_URL scripts/sitemap.ts"
   },
   "dependencies": {
     "@lucide/svelte": "^1.23.0",
